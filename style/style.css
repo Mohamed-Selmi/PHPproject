@@ -1,0 +1,143 @@
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}  
+body{
+    height: 100vh;
+    background-color: #E0E2DB;
+    display:flex;
+    flex-direction: column;
+    
+    font-family: 'Courier New', Courier, monospace;
+}
+ul,form,.input,.header,.body,.opportunities,.oppdiv,.container,.logoText{
+    display: flex;
+}
+form,.form,.body,.opportunities,.oppdiv,.logoText{
+    flex-direction: column;
+    gap:18px;
+   
+}
+form{
+    height: 100%;
+    border:3px solid black;
+    padding:50px;
+    border-radius: 15px;
+    flex-direction: column;
+    
+}
+.form{
+    width:40%;
+    gap:15px;
+}
+
+.input,.Current,form{
+    width:100%;
+    gap:18px;
+    font-size:32px;
+    color:#000F08;
+    font-weight: bolder;
+}
+
+.list{
+    display:flex;
+    background-color:#397367 ;
+    border: 3px solid #000F08;
+    border-top:none;
+    width:95%;
+    gap:15px;
+    padding:30px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+.header{
+    width:100%;
+    align-items: center;
+    flex-direction: column;
+    align-self: center;
+    gap:32px;
+    max-height:20%;
+    margin-bottom:auto;
+}
+ul{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    justify-content: space-around;
+    align-items:center;
+    flex:auto;
+
+}
+li{
+    flex:auto;
+}
+ul a{
+    color:white;
+    font-weight: bolder;
+    font-size: 24px;
+    
+}
+a{
+    text-decoration: none;
+}
+a :hover{
+    color:#8B2635;
+    
+}
+.body{
+    justify-content: space-between;
+    align-items: center;
+    flex-grow:3;
+    max-height: 70%;
+}
+.opportunities{
+    flex-flow: row wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.oppdiv{
+    border:1px solid black;
+    background-color: #8B2635;
+    color:white;
+}
+
+.Current{
+ 
+   
+    text-align: center;
+}
+.container{
+    flex-grow:3;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.footer{
+    
+    margin-top:auto;
+    background-color: #8B2635;
+    max-height: 10%;
+}
+.button{
+    background-color: #1C77C3;
+    height:25px;
+    font-weight: bold;
+    color:white;
+    width:50%;
+    align-self: center;
+    border:1px solid #000F08;
+    border-radius: 10px;
+}
+.logoText{
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    gap: 48px;
+}
+h2{
+    font-family:'Courier New', Courier, monospace;
+
+    text-align: center;
+}
