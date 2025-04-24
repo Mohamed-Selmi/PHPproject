@@ -14,7 +14,7 @@ $id = $_SESSION['id'];
     <script src="scripts.js" defer></script> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Organizations</title>
 </head>
 <body>
 <div class="header">
@@ -61,7 +61,7 @@ $id = $_SESSION['id'];
         <div>
    
 </div>
-
+            </div>
 <div class="body">
     
 <form class="addform" style="all: unset; align-self:center;" action="" method="POST">
@@ -73,29 +73,36 @@ $id = $_SESSION['id'];
         <input class="button" type="submit" value="Add" name="ok">
         </div>
     </form>
-</div>
+
    
     <div class="selectiondiv">
     <?php
         include("config.php");
-        $req="select * from organization";
-        $res=mysqli_query($c,$req); 
-        while ($l=mysqli_fetch_array($res)){
-            echo "<div class='fetchdiv'>
-            <ul style='display:flex; flex-direction:column; align-items:flex-start; padding:10px;'>
-            <li><strong>Name: :</strong> $l[1] </li>
-            <li> <strong>Mission : </strong> $l[2]</li>
-            <li><strong>Email:</strong>$l[3]</li>
-            <li><strong>Location :</strong>$l[4]</li>
-            
-            </ul>
-            <form class='buttonsForm'  action='' method='POST'>
-            <input type='hidden' name='orgid' value='$l[0]'>
-           
-            <input class='submit'  type='submit' value='Delete' name='delete'></form>
-            </div>";
-          
+        if (isset($_POST['search'])) {
+            $titre=$_POST['titre'];
+            $req="select * from organization where name like '%$titre%'";
         }
+        else {
+              $req="select * from organization";
+        }
+            $res=mysqli_query($c,$req); 
+            while ($l=mysqli_fetch_array($res)){
+                echo "<div class='fetchdiv'>
+                <ul style='display:flex; flex-direction:column; align-items:flex-start; padding:10px;'>
+                <li><strong>Name: :</strong> $l[1] </li>
+                <li> <strong>Mission : </strong> $l[2]</li>
+                <li><strong>Email:</strong>$l[3]</li>
+                <li><strong>Location :</strong>$l[4]</li>
+                
+                </ul>
+                <form class='buttonsForm'  action='' method='POST'>
+                <input type='hidden' name='orgid' value='$l[0]'>
+               
+                <input class='submit'  type='submit' value='Delete' name='delete'></form>
+                </div>";
+              
+            }
+       
         if (isset($_POST['ok']))
         {   $name=$_POST['name'];
             $mission=$_POST['mission'];
@@ -109,8 +116,11 @@ $id = $_SESSION['id'];
         {   $orgid=$_POST['orgid'];
             $org="DELETE FROM organization where org_id=$orgid;";
             $resy=mysqli_query($c,$org);
-            header("Location: organizations.php");
-            exit();
+            echo "<script>
+            alert('$orgid deleted successfully!');
+            window.location.href = 'organizations.php'; // Redirect to the same page
+          </script>";
+    exit(); 
         }
        
 
@@ -118,7 +128,7 @@ $id = $_SESSION['id'];
     </div>
    
 </div>
-<div class="footer"><p> MADE WITH CARE</p>
+<div class="footer"> <h3> Created by mohamed Amine Selmi 3G1 for a php project 18/20</h3>
 </div>
 </body>
 </html>

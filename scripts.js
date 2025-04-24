@@ -7,19 +7,29 @@ const searchbar=document.querySelector(".search_bar");
   function generateInput(){
     
     if (numberOfClicks===0){
+    const form=document.createElement("form")
+    form.method="POST"
+    form.setAttribute("class","searchForm")
+    form.setAttribute("style","all:unset")
+    const Titre=document.createElement("input");
+    Titre.name="titre";
+    Titre.type="text";
     const input=document.createElement("input");
     input.name="search";
-    input.type="text";
-    input.value="aaaaa";
-    searchbar.appendChild(input);
+    input.type="submit";
+    input.value="Search";
+    form.appendChild(Titre);
+    form.appendChild(input);
+  
+    searchbar.appendChild(form);
     numberOfClicks=1;
-    console.log("aa")
+    
     
     }
     else{
-        const input=document.querySelector("input");
-       input.remove();
-       console.log("aa")
+        const form=document.querySelector(".searchForm");
+        form.remove();
+        window.location.href = window.location.href;
        numberOfClicks=0;
     }
   }

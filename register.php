@@ -53,7 +53,7 @@ mysqli_close($c);
 
 }
   ?>
-   <div class="footer"><p> MADE WITH CARE</p>
+   <div class="footer"> <h3> Created by mohamed Amine Selmi 3G1 for a php project. Note 18/20</h3>
    </div>
 </body>
 </html>

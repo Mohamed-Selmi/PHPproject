@@ -75,7 +75,14 @@ $id = $_SESSION['id'];
 <div class="selectiondiv">
     <?php
     include("config.php");
-    $req="SELECT org.name,o.description,o.location,a.applied_on,o.end_date,a.app_id from applications a join opportunities o on (a.opportunity_id=o.opportunity_id) join organization org on (org.org_id=o.org_id) where user_id=$id";
+    if (isset($_POST['search']))
+    {   $titre=$_POST['titre'];
+    $req="SELECT org.name,o.description,o.location,a.applied_on,o.end_date,a.app_id from applications a join opportunities o on (a.opportunity_id=o.opportunity_id) join organization org on (org.org_id=o.org_id) where user_id=$id and o.title LIKE '%$titre%'";
+    }
+    else {
+        $req="SELECT org.name,o.description,o.location,a.applied_on,o.end_date,a.app_id from applications a join opportunities o on (a.opportunity_id=o.opportunity_id) join organization org on (org.org_id=o.org_id) where user_id=$id";
+
+    }
     $res=mysqli_query($c,$req);
     while($l=mysqli_fetch_array($res)){
         echo "<div class='fetchdiv'>
@@ -97,15 +104,18 @@ $id = $_SESSION['id'];
     {   $appid=$_POST['idapp'];
         $reqx="DELETE from applications where app_id=$appid;";
         $resx=mysqli_query($c,$reqx);
-        header("Location: applications.php");
-
+        echo "<script>
+        window.location.href = 'organizations.php'; // Redirect to the same page
+      </script>";
+exit(); 
+        exit();
     }
     mysqli_close($c);
 ?>
 </div>
 </div>
 <div class="footer">
-    <p> MADE WITH CARE</p>
+    <h3> Created by mohamed Amine Selmi 3G1 for a php project. Note 18/20</h3>
 </div>
 </body>
 </html>

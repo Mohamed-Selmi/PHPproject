@@ -86,6 +86,30 @@ $id = $_SESSION['id'];
     <div class="selectiondiv">
     <?php
     include("config.php");
+     
+    if (isset($_POST['search']))
+    {   $titre=$_POST['titre'];
+        $req = "SELECT * FROM opportunities WHERE title LIKE '%$titre%'";
+    }
+    else {$req = "SELECT * FROM opportunities"; }
+        $res=mysqli_query($c,$req); 
+        while ($l=mysqli_fetch_array($res)){
+            echo "<div class='fetchdiv'>
+            <ul style='display:flex; flex-direction:column; align-items:flex-start; padding:10px;'>
+            <li><strong>Titre :</strong> $l[2] </li>
+            <li> <strong>Description : </strong> $l[3]</li>
+            <li><strong>Location:</strong>$l[4]</li>
+            <li><strong>Publication Date :</strong>$l[5]</li>
+             <li><strong>Deadline :</strong>$l[6]</li>
+            </ul>
+            <form class='buttonsForm'  action='' method='POST'>
+            <input type='hidden' name='idopp' value='$l[0]'>
+            <input class='submit'  type='submit' value='Delete' name='delete'>
+            <input class='submit'  type='submit' value='Apply' name='apply'> </form>
+           
+            </div>";
+          
+        }
     
     if (isset($_POST['ok']))
     {   $org=$_POST['org'];
@@ -96,39 +120,39 @@ $id = $_SESSION['id'];
         $endDate=$_POST['date_fin'];
         $opp="INSERT INTO `opportunities` (`opportunity_id`, `org_id`, `title`,`description`,`location`,`start_date`,`end_date`) VALUES (NULL, '$org','$title', '$desc','$location','$startDate','$endDate');";
         $resy=mysqli_query($c,$opp);
-        header("refresh:0");
+        echo "<script>
+        window.location.href = 'opportunities.php'; // Redirect to the same page
+      </script>";
     }
-    $req="select * from opportunities";
-    $res=mysqli_query($c,$req); 
-    while ($l=mysqli_fetch_array($res)){
-        echo "<div class='fetchdiv'>
-        <ul style='display:flex; flex-direction:column; align-items:flex-start; padding:10px;'>
-        <li><strong>Titre :</strong> $l[2] </li>
-        <li> <strong>Description : </strong> $l[3]</li>
-        <li><strong>Location:</strong>$l[4]</li>
-        <li><strong>Publication Date :</strong>$l[5]</li>
-         <li><strong>Deadline :</strong>$l[6]</li>
-        </ul>
-        <form class='buttonsForm'  action='' method='POST'>
-        <input type='hidden' name='idopp' value='$l[0]'>
-        
-        <input class='submit'  type='submit' value='Apply' name='apply'></form>
-       
-        </div>";
-      
-    }
+    
+    
     if (isset($_POST['apply']))
     {   $oppid=$_POST['idopp'];
         $datesystem=date("Y/m/d");
         $app="INSERT INTO `applications` (`app_id`, `user_id`, `opportunity_id`, `applied_on`) VALUES (NULL, '$id',$oppid, '$datesystem');";
         $resx=mysqli_query($c,$app);
     }
+    if (isset($_POST['delete']))
+    {   $oppid=$_POST['idopp'];
+        $reqx = "DELETE o FROM opportunities o 
+        JOIN organization org ON o.org_id = org.org_id
+        WHERE o.opportunity_id = '$oppid' 
+        AND org.email = (SELECT email FROM user WHERE id = '$id')";
+        $resx=mysqli_query($c,$reqx);
+        if (!$resx) {
+            die("Error deleting opportunity: " . mysqli_error($c));
+        }
+        echo "<script>
+        window.location.href = 'opportunities.php'; // Redirect to the same page
+      </script>";
+
+    }
     mysqli_close($c);
     ?>
     </div>
     </div>
     
-    <div class="footer"><p> MADE WITH CARE</p>
+    <div class="footer"><h3> Created by mohamed Amine Selmi 3G1 for a php project. Note 18/20</h3>
         </div>
 </body>
 
