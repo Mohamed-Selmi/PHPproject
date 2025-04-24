@@ -5,20 +5,21 @@
     padding:0;
 }  
 body{
-    height: 100vh;
+    height: 100vh;    
     background-color: #E0E2DB;
     display:flex;
     flex-direction: column;
-    
+    justify-content: space-around;
+    gap:14px;
     font-family: 'Courier New', Courier, monospace;
 }
-ul,form,.input,.header,.body,.opportunities,.oppdiv,.container,.logoText{
+ul,form,.input,.header,.body,.selectiondiv,.fetchdiv,.container,.logoText,.story,.stories{
     display: flex;
+    
 }
-form,.form,.body,.opportunities,.oppdiv,.logoText{
+form,.form,.body,.selectiondiv,.fetchdiv,.logoText,.story{
     flex-direction: column;
     gap:18px;
-   
 }
 form{
     height: 100%;
@@ -26,7 +27,6 @@ form{
     padding:50px;
     border-radius: 15px;
     flex-direction: column;
-    
 }
 .form{
     width:40%;
@@ -57,8 +57,8 @@ form{
     align-items: center;
     flex-direction: column;
     align-self: center;
-    gap:32px;
-    max-height:20%;
+    gap:16px;
+    max-height:30%;
     margin-bottom:auto;
 }
 ul{
@@ -87,21 +87,31 @@ a :hover{
     
 }
 .body{
+    margin-top:30px;
     justify-content: space-between;
     align-items: center;
     flex-grow:3;
-    max-height: 70%;
+   
+    
+
 }
-.opportunities{
+.selectiondiv{
     flex-flow: row wrap;
-    align-content: flex-start;
-    justify-content: flex-start;
-    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap:32px;
+    width:85%;
 }
-.oppdiv{
-    border:1px solid black;
-    background-color: #8B2635;
+.fetchdiv{
+    border:3px solid black;
+    background-color: #1C77C3;
     color:white;
+    width:32%;
+    border-radius: 10px;
+    font-size:18px;
+    padding:10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .Current{
@@ -115,7 +125,6 @@ a :hover{
     align-items: center;
 }
 .footer{
-    
     margin-top:auto;
     background-color: #8B2635;
     max-height: 10%;
@@ -140,4 +149,48 @@ h2{
     font-family:'Courier New', Courier, monospace;
 
     text-align: center;
+}
+.submit{
+    background-color: #8B2635;
+    font-weight: bold;
+    width:50%;
+    
+    border-radius: 15px;
+    align-self: center;
+    height: 100%;
+    border:1px solid #E0E2DB;
+}
+.buttonsForm{
+    all: unset;
+    align-self:center;
+    width:50%;
+    height:25px;
+     display:flex;
+    justify-content:center;
+}
+.stories{
+    margin:auto;
+    gap:50px;
+    justify-content: center;
+    background-image: linear-gradient(to right,#8B2635 ,#F6F740);
+    width: 100%;
+    padding: 10px;
+
+}
+.story{
+    background-color: #1C77C3;
+    border: 1px solid black;
+    width:310px;
+    align-items: center;
+    padding:10px;
+    height: fit-content;
+    border-radius: 50px;
+}
+.story h1{
+    color:white;
+    font-size: 24px;;
+}
+.storyimg{
+    border:1px solid darkblue;
+    border-radius:15px;
 }

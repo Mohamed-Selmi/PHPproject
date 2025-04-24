@@ -13,44 +13,107 @@ $id = $_SESSION['id'];
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/style.css" >
+    <script src="scripts.js" defer></script> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunities</title>
+  
 </head>
 <body>
 <div class="header">
         <div class="list">
-        <ul>
-            <div><li><img src="assets/logoV.svg" height="50px" width="50px"></li></div>
-            <li><a href="applications.php"><strong>HomePage</strong></a></li>
-            <li><a href="applications.php"><strong>Organizations</strong></a></li>
-            <li><a href="opportunities.php"><strong>Volunteer Opportunities</strong></a></li>
-            <li><a href="applications.php"><strong>Applications</strong></a></li>
-            <li><a href="logout.php"><img src="assets/logout.svg" height="55px" width="50px" alt="Logout"></a></li>
-            
-        </ul>
+            <ul>
+            <li><a href="index.php"><img src="assets/logoV.svg" height="50px" width="50px"></a></li>
+                <li><a href="index.php"><strong>HomePage</strong></a></li>
+                <li><a href="organizations.php"><strong>Organizations</strong></a></li>
+                <li><a href="opportunities.php"><strong>Volunteer Opportunities</strong></a></li>
+                <li><a href="applications.php"><strong>Applications</strong></a></li>
+                <li><a href="logout.php"><img src="assets/logout.svg" height="55px" width="50px" alt="Logout"></a></li>
+                
+            </ul>
+        </div>
+        <div style="display:flex; width:85%; background-image: linear-gradient(to right,#058ED9 ,#E9FF70); justify-content:space-between; padding:15px; align-items:center;">
+<img src="assets/logoV.svg" height="100px" width="100px">
+<div style="display:flex;flex-direction:column; margin-left:50px; font-size:24px; justify-content:space-evenly; font-weight:bold; color:white;">
+ <h1>VOlunteering opportunities</h1>
+    <p>View all available opportunities!</p> 
 </div>
-<div class="Current">  <h1>All available opportunities:</h1></div>
+<div style="font-weight:bold; color:#52050A; text-align:left; padding:10px;">
+    <?php 
+             include("config.php");
+                            $reqa = "
+                    SELECT 
+                        (SELECT username FROM user WHERE id = '$id') AS username, 
+                        (SELECT COUNT(*) FROM opportunities) AS opp_count
+                ";
+                $resa = mysqli_query($c, $reqa);
+             if($l=mysqli_fetch_array($resa)){
+                echo"<h2>Welcome $l[0]!</h2><br>
+                <h3>There are $l[1] opportunities available to choose from!</h3>";
+             }
+         
+           
+
+         mysqli_close($c);
+?>
+
 </div>
 
-        <div class="body">
-     <div class="add_opp">
-        <form action="" method="POST">
-        <label for="organisztion">Organisation:</label> <input type="text" name="organization">
-        </form>
+</div>
+    <div class="search_bar">
+         <button class="add"><img src="assets/add.svg" height="30px" width="30px"></button>
+
+         <button class="search"><img src="assets/search.svg" height="30px" width="30px"></button>
         </div>
-    <div class="opportunities">
+      
+  
+</div>
+
+
+<div class="body">
+    
+    <form class="addform" style="all: unset; align-self:center;" action="" method="POST">
+    <div style="flex-direction:column;flex:wrap; display:flex;  align-self:center;">
+        <label for="org_id">Organisation id:</label> <input type="number" name="org">
+        <label for="title">Title:</label><input type="text" name="title">
+        <label for="description">Description:</label><input type="text" name="desc">
+        <label for="location">Location:</label> <input type="text" name="location">
+        <label for="Dated">Start Date:</label> <input type="date" name="date_deb">
+        <label for="DateF">End Date:</label> <input type="date" name="date_fin">
+        <input class="button" type="submit" value="Add" name="ok">
+        </div>
+    </form>
+   
+    <div class="selectiondiv">
     <?php
     include("config.php");
+    
+    if (isset($_POST['ok']))
+    {   $org=$_POST['org'];
+        $title=$_POST['title'];
+        $desc=$_POST['desc'];
+        $location=$_POST['location'];
+        $startDate=$_POST['date_deb'];
+        $endDate=$_POST['date_fin'];
+        $opp="INSERT INTO `opportunities` (`opportunity_id`, `org_id`, `title`,`description`,`location`,`start_date`,`end_date`) VALUES (NULL, '$org','$title', '$desc','$location','$startDate','$endDate');";
+        $resy=mysqli_query($c,$opp);
+        header("refresh:0");
+    }
     $req="select * from opportunities";
     $res=mysqli_query($c,$req); 
     while ($l=mysqli_fetch_array($res)){
-        echo "<div class='oppdiv'>
-        <ul>
-        <li>id:$l[0] org: $l[1] titre : $l[2]<br>description : $l[3]<br>date de publication :$l[4]<br>
+        echo "<div class='fetchdiv'>
+        <ul style='display:flex; flex-direction:column; align-items:flex-start; padding:10px;'>
+        <li><strong>Titre :</strong> $l[2] </li>
+        <li> <strong>Description : </strong> $l[3]</li>
+        <li><strong>Location:</strong>$l[4]</li>
+        <li><strong>Publication Date :</strong>$l[5]</li>
+         <li><strong>Deadline :</strong>$l[6]</li>
         </ul>
-        <form action='' method='POST'>
+        <form class='buttonsForm'  action='' method='POST'>
         <input type='hidden' name='idopp' value='$l[0]'>
-        <input type='submit' value='Apply' name='apply'></form>
+        
+        <input class='submit'  type='submit' value='Apply' name='apply'></form>
+       
         </div>";
       
     }
@@ -64,7 +127,9 @@ $id = $_SESSION['id'];
     ?>
     </div>
     </div>
+    
     <div class="footer"><p> MADE WITH CARE</p>
         </div>
 </body>
+
 </html>

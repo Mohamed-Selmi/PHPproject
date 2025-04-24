@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-<body>
+<body style="height: 100vh;">
 <div class="header">
         <div class="list">
         <ul>
@@ -26,7 +26,7 @@
     <div class="Current">  <h2>Sign into account:</h2></div>
     <div>
     <form action="" method="POST">
-    <label for="email">Email:</label> <input type="text" name="email">
+    <label for="email">Email:</label> <input type="email" name="email">
     <label for="password">Password:</label><input type="password" name="pw">
      <input class="button" type="submit" value="Login" name="ok">
     </form>
@@ -57,6 +57,7 @@
     mysqli_close($c);
 }
 ?>
+</div>
  <div class="footer"><p> MADE WITH CARE</p>
  </div>
 </body>

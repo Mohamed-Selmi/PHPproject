@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/style.css">
     <title>register</title>
 </head>
-<body>
+<body style="height: 100vh;">
 <div class="header">
         <div class="list">
         <ul>
@@ -18,8 +18,9 @@
 </div>
 
 </div>
-<div >
+
 <div class="container">
+    
 <div class="logoText">
             <div><img src="assets/logoV.svg" height="300px" width="300px"></div>
             <div>  <h2>Volunteer:</h2></div>
@@ -29,9 +30,9 @@
     <div class="Current">  <h2>Create an account:</h2></div>
         <div>
         <form action="" method="POST">
-            <label for="username">Username:</label> <input type="text" name="username">
-        <label for="email">Email:</label> <input type="text" name="email">
-            <label for="password">Password:</label><input type="password" name="pw">
+            <label for="username">Username:</label> <input type="text" name="username" required>
+        <label for="email">Email:</label> <input type="email" name="email" required>
+            <label for="password">Password:</label><input type="password" name="pw" required>
             <input type="submit" value="Register" name="ok" class="button">
         </form>
     </div>
